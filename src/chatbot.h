@@ -3,12 +3,16 @@
 
 #include <wx/bitmap.h>
 #include <string>
+#include <iostream>
+
+#define printVariableNameAndValue(x) cout<<"The name of variable **"<<(#x)<<"** and the value of variable is => "<<x<<"\n"
+
+using namespace std;
 
 class GraphNode; // forward declaration
 class ChatLogic; // forward declaration
 
-class ChatBot
-{
+class ChatBot {
 private:
     // data handles (owned)
     wxBitmap *_image; // avatar image
@@ -30,14 +34,28 @@ public:
     //// STUDENT CODE
     ////
 
+    ChatBot(const ChatBot &source);
+
+    ChatBot(ChatBot &&source);
+
+    ChatBot &operator=(ChatBot &&source);
+
+    ChatBot &operator=(const ChatBot &source);
+
     ////
     //// EOF STUDENT CODE
 
     // getters / setters
     void SetCurrentNode(GraphNode *node);
+
     void SetRootNode(GraphNode *rootNode) { _rootNode = rootNode; }
+
     void SetChatLogicHandle(ChatLogic *chatLogic) { _chatLogic = chatLogic; }
-    wxBitmap *GetImageHandle() { return _image; }
+
+    wxBitmap *GetImageHandle() {
+        // printVariableNameAndValue(_image);
+        return _image;
+    }
 
     // communication
     void ReceiveMessageFromUser(std::string message);
